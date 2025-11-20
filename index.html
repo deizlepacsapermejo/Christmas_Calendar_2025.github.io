@@ -8,22 +8,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="snowflakes-container" aria-hidden="true">
+        <div class="snowflake">❅</div><div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❄</div>
+        <div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❄</div><div class="snowflake">❅</div>
+        <div class="snowflake">❆</div><div class="snowflake">❄</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
+        <div class="snowflake">❄</div><div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❄</div>
+    </div>
+
     <div class="calendar-container">
-        <h1>Christmas 2025 Countdown!</h1>
         
-        <div class="day-labels">
-            <span>M</span>
-            <span>T</span>
-            <span>W</span>
-            <span>T</span>
-            <span>F</span>
-            <span>S</span>
-            <span>S</span>
+        <div class="month-navigation">
+            <button id="prevMonth" class="nav-button">&lt;</button> 
+            
+            <div class="month-title" id="monthTitle"></div> 
+            
+            <button id="nextMonth" class="nav-button">&gt;</button> 
         </div>
-        
-        <div class="calendar-grid" id="calendarGrid">
+
+        <div class="day-labels">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+        </div>
+
+        <div class="month-grid" id="monthGrid">
             </div>
-        <p id="message"></p>
+        
     </div>
 
     <script src="js/script.js"></script>
