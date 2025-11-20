@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 Full Calendar</title>
+    <title>2025 Christmas Calendar</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="calendar-container">
-        <h1>Full Year Calendar 2025</h1>
+        <h1>2025 Holiday Calendar</h1>
         
+        <div class="month-navigation">
+            <button id="prevMonth" class="nav-button">&lt;</button> 
+            
+            <div class="month-title" id="monthTitle"></div> 
+            
+            <button id="nextMonth" class="nav-button">&gt;</button> 
+        </div>
+
         <div class="day-labels">
             <span>Sun</span>
             <span>Mon</span>
@@ -21,8 +29,9 @@
             <span>Sat</span>
         </div>
 
-        <div class="year-view" id="yearView">
-        </div>
+        <div class="month-grid" id="monthGrid">
+            </div>
+        
     </div>
 
     <script src="js/script.js"></script>
