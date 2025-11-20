@@ -1,122 +1,128 @@
+/* --- Subtle Star Pattern Background --- */
 body {
-    /* Christmas Background: Red/Green Gradient */
-    font-family: 'Mountains of Christmas', cursive;
-    background: linear-gradient(to bottom, #004d00, #990000); 
-    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fce4ec; /* Very light pink background */
+    color: #333;
     display: flex;
     justify-content: center;
-    align-items: center; /* Center vertically as well */
+    align-items: center;
     min-height: 100vh;
     margin: 0;
     padding: 20px;
+    /* Adding a subtle, repeating star pattern, similar to the image */
+    background-image: radial-gradient(#ffe0e0 1px, transparent 0);
+    background-size: 15px 15px;
 }
 
 .calendar-container {
-    /* Main container: Dark Green with gold border effect */
-    background-color: rgba(0, 0, 0, 0.7);
+    /* White card with heavy rounded corners and light shadow */
+    background-color: #ffffff;
     padding: 30px;
-    border-radius: 15px;
-    border: 5px solid #ffd700; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 20px; /* Very rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 500px; /* **Single, prominent size** */
+    max-width: 450px; /* Slimmer for a cleaner look */
     width: 100%;
 }
 
-h1 {
-    font-size: 2.5em; /* Slightly smaller header */
-    color: #ffd700; 
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-}
+/* We removed the <h1> element, so this section is gone */
 
 /* --- Month Navigation and Title --- */
 .month-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .month-title {
-    font-size: 2em;
-    color: #fff;
+    /* Larger, bold text, dark green color */
+    font-size: 1.8em;
+    color: #008000; /* Dark Green */
     font-weight: 700;
     flex-grow: 1;
-    text-align: center;
-    padding: 0 10px;
+    text-align: left; /* Aligned left, as in the image */
+    padding-left: 5px;
 }
 
 .nav-button {
-    background-color: #ffd700; /* Gold buttons */
-    color: #990000; /* Red text */
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    font-size: 1.5em;
-    font-weight: 700;
+    /* Small, discreet navigation arrows */
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Slightly rounded edges */
+    padding: 5px 10px;
+    margin-left: 5px;
+    font-size: 1.2em;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-    line-height: 1; /* Keep button height compact */
+    transition: background-color 0.2s;
+    line-height: 1;
 }
 
 .nav-button:hover {
-    background-color: #ffeb80; /* Lighter gold on hover */
-    transform: scale(1.05);
+    background-color: #f0f0f0;
 }
 
 /* --- Day Labels (Sun, Mon, etc.) --- */
 .day-labels {
     display: grid;
     grid-template-columns: repeat(7, 1fr); 
-    gap: 3px;
-    margin-bottom: 5px;
-    font-weight: 700;
+    gap: 5px;
+    margin-bottom: 15px;
+    font-weight: 500; /* Medium weight */
     font-size: 0.9em;
-    color: #fff; 
-    border-bottom: 2px dashed #990000; 
-    padding-bottom: 8px;
+    color: #cc0000; /* Red for the day labels */
+    border-bottom: none; /* No line */
+    padding-bottom: 0;
 }
 
 .day-labels span {
     text-align: center; 
 }
 
-/* --- Single Month Grid --- */
+/* --- Single Month Grid (The actual dates) --- */
 .month-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-top: 10px;
+    gap: 15px 0; /* Vertical spacing is larger than horizontal */
 }
 
 .day-cell {
-    padding: 10px 0;
+    padding: 5px 0;
     text-align: center;
-    font-size: 1.2em;
-    border-radius: 6px;
-    color: white; 
-    background-color: rgba(0, 102, 0, 0.7); /* Dark green for standard days */
-    transition: background-color 0.2s, transform 0.1s;
-    height: 35px; /* Fixed height for consistent look */
+    font-size: 1.1em;
+    border-radius: 50%; /* Make the highlight circular */
+    color: #333; /* Default dark text */
+    background-color: transparent; 
+    transition: background-color 0.2s;
+    height: 30px; /* Fixed height for consistent circle sizing */
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 500;
 }
 
-.day-cell:not(.empty):hover {
-    background-color: #008000;
-    transform: scale(1.05);
+/* Weekend Styling (Matches the red color in the image) */
+.day-labels span:first-child, /* Sun label */
+.day-labels span:last-child {  /* Sat label */
+    color: #cc0000;
+}
+.month-grid .day-cell:nth-child(7n+1), /* All Sundays */
+.month-grid .day-cell:nth-child(7n) {   /* All Saturdays */
+    color: #cc0000; 
+}
+.month-grid .day-cell.empty {
+    /* Reset weekend color for empty cells */
+    color: transparent;
 }
 
-.day-cell.empty {
-    background-color: transparent;
-}
 
+/* Current Day Styling (Dark Red Circle, White Text) */
 .day-cell.current-day {
-    background-color: #ffd700;
-    color: #990000; 
+    background-color: #cc0000; /* Dark Red circle */
+    color: #ffffff; /* White text */
     font-weight: 700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
 }
