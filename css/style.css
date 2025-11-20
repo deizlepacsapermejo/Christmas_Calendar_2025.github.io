@@ -1,7 +1,7 @@
-/* --- Subtle Star Pattern Background --- */
+/* --- Body: Simple light pink for contrast --- */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #fce4ec; /* Very light pink background */
+    background-color: #fce4ec; /* Light pink */
     color: #333;
     display: flex;
     justify-content: center;
@@ -9,23 +9,37 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 20px;
-    /* Adding a subtle, repeating star pattern, similar to the image */
-    background-image: radial-gradient(#ffe0e0 1px, transparent 0);
-    background-size: 15px 15px;
 }
 
 .calendar-container {
-    /* White card with heavy rounded corners and light shadow */
-    background-color: #ffffff;
+    /* Colorful Gradient Background with Stars for the main card */
+    background: 
+        linear-gradient(135deg, #ffc0cb, #e6e6fa, #add8e6, #90ee90, #ffd700); /* Multi-color gradient */
+    background-size: 400% 400%; /* Allows for animation potential */
+    animation: gradientShift 10s ease infinite; /* Subtle animation for the gradient */
+    
+    /* Subtle star pattern on top of the gradient */
+    background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 0),
+                      linear-gradient(135deg, #ffc0cb, #e6e6fa, #add8e6, #90ee90, #ffd700); /* Re-apply gradient */
+    background-size: 15px 15px, 400% 400%; /* Star pattern size, gradient size */
+
     padding: 30px;
-    border-radius: 20px; /* Very rounded corners */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow */
     text-align: center;
-    max-width: 450px; /* Slimmer for a cleaner look */
+    max-width: 450px; 
     width: 100%;
+    position: relative; /* Needed for any absolute positioning later if desired */
+    overflow: hidden; /* Ensures stars don't bleed out */
 }
 
-/* We removed the <h1> element, so this section is gone */
+/* Gradient Animation Keyframes */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 
 /* --- Month Navigation and Title --- */
 .month-navigation {
@@ -33,24 +47,26 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
+    position: relative; /* Ensure it stays above the gradient */
+    z-index: 1; 
 }
 
 .month-title {
-    /* Larger, bold text, dark green color */
+    /* Color adjusted for better contrast on colorful background */
     font-size: 1.8em;
-    color: #008000; /* Dark Green */
+    color: #4a001a; /* Darker red/purple for contrast */
     font-weight: 700;
     flex-grow: 1;
-    text-align: left; /* Aligned left, as in the image */
+    text-align: left; 
     padding-left: 5px;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5); /* Subtle shadow for readability */
 }
 
 .nav-button {
-    /* Small, discreet navigation arrows */
-    background-color: transparent;
+    background-color: rgba(255,255,255,0.7); /* Slightly transparent white buttons */
     color: #333;
-    border: 1px solid #ccc;
-    border-radius: 8px; /* Slightly rounded edges */
+    border: none; /* No border for a softer look */
+    border-radius: 8px; 
     padding: 5px 10px;
     margin-left: 5px;
     font-size: 1.2em;
@@ -58,10 +74,13 @@ body {
     cursor: pointer;
     transition: background-color 0.2s;
     line-height: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for buttons */
+    z-index: 1; /* Ensure it stays above the gradient */
+    position: relative;
 }
 
 .nav-button:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(255,255,255,0.9);
 }
 
 /* --- Day Labels (Sun, Mon, etc.) --- */
@@ -70,11 +89,12 @@ body {
     grid-template-columns: repeat(7, 1fr); 
     gap: 5px;
     margin-bottom: 15px;
-    font-weight: 500; /* Medium weight */
+    font-weight: 500; 
     font-size: 0.9em;
-    color: #cc0000; /* Red for the day labels */
-    border-bottom: none; /* No line */
+    color: #800000; /* Darker red for labels */
     padding-bottom: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .day-labels span {
@@ -85,35 +105,45 @@ body {
 .month-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 15px 0; /* Vertical spacing is larger than horizontal */
+    gap: 15px 0; 
+    position: relative;
+    z-index: 1;
 }
 
 .day-cell {
     padding: 5px 0;
     text-align: center;
     font-size: 1.1em;
-    border-radius: 50%; /* Make the highlight circular */
-    color: #333; /* Default dark text */
-    background-color: transparent; 
+    border-radius: 50%; 
+    color: #333; 
+    background-color: rgba(255,255,255,0.7); /* **Semi-transparent white for day cells** */
     transition: background-color 0.2s;
-    height: 30px; /* Fixed height for consistent circle sizing */
+    height: 30px; 
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 500;
 }
 
-/* Weekend Styling (Matches the red color in the image) */
-.day-labels span:first-child, /* Sun label */
-.day-labels span:last-child {  /* Sat label */
-    color: #cc0000;
+/* Adjust hover for transparent cells */
+.day-cell:not(.empty):hover {
+    background-color: rgba(255,255,255,0.9);
 }
-.month-grid .day-cell:nth-child(7n+1), /* All Sundays */
-.month-grid .day-cell:nth-child(7n) {   /* All Saturdays */
-    color: #cc0000; 
+
+.day-cell.empty {
+    background-color: transparent; /* Empty cells remain transparent */
+}
+
+/* Weekend Styling (Matches the red color in the image) */
+.day-labels span:first-child, 
+.day-labels span:last-child {  
+    color: #800000; /* Darker red for contrast */
+}
+.month-grid .day-cell:nth-child(7n+1), 
+.month-grid .day-cell:nth-child(7n) {   
+    color: #800000; 
 }
 .month-grid .day-cell.empty {
-    /* Reset weekend color for empty cells */
     color: transparent;
 }
 
@@ -123,6 +153,6 @@ body {
     background-color: #cc0000; /* Dark Red circle */
     color: #ffffff; /* White text */
     font-weight: 700;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow for highlight */
     border: none;
 }
