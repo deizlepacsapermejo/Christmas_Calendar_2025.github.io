@@ -1,96 +1,94 @@
 body {
-    font-family: 'Mountains of Christmas', cursive;
-    background: linear-gradient(to bottom right, #e60000, #ff8080); /* Red gradient background remains full screen */
-    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6; /* Light gray background */
+    color: #333;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Start from the top */
     min-height: 100vh;
     margin: 0;
-    padding: 10px; /* Reduced padding */
+    padding: 30px 10px;
 }
 
 .calendar-container {
-    background-color: rgba(0, 51, 0, 0.9); /* Dark green, slightly transparent */
-    padding: 20px; /* Reduced padding */
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    background-color: #ffffff; /* White card background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 700px; /* **MADE SMALLER: Reduced from 900px** */
+    max-width: 900px; /* Wider view for all months */
     width: 100%;
 }
 
 h1 {
-    font-size: 2.5em; /* Slightly smaller header */
-    color: #ffd700; /* Gold */
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-size: 2.2em;
+    color: #007bff; /* Blue header */
+    margin-bottom: 30px;
 }
 
+/* --- Day Labels (Updated to full names and starting on Sunday) --- */
 .day-labels {
     display: grid;
-    /* Adjusted column sizing for the smaller width, ensuring 7 columns */
     grid-template-columns: repeat(7, 1fr); 
-    gap: 8px; /* Reduced gap */
+    gap: 5px;
     margin-bottom: 5px;
     font-weight: 700;
-    font-size: 1.2em; /* Smaller label text */
-    color: #ffd700; 
+    font-size: 0.9em;
+    color: #6c757d; /* Gray for the labels */
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 5px;
 }
 
 .day-labels span {
     text-align: center; 
 }
+/* ------------------------------------------------------------------ */
 
-.calendar-grid {
+.year-view {
     display: grid;
-    /* Use the fixed 7-column layout, reducing the min size */
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 8px; /* Reduced gap to match labels */
+    /* 3 months per row on wide screens, responsive below */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px;
+    margin-top: 20px;
 }
 
-.door {
-    background-color: #ff0000;
-    border: 2px solid #ffd700; /* Thinner border */
-    border-radius: 8px; /* Slightly smaller corners */
-    height: 80px; /* **Made Smaller** */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none;
-    font-size: 1em; /* Smaller font */
+.month-card {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #f8f9fa; /* Very light gray month background */
+}
+
+.month-title {
+    font-size: 1.5em;
+    color: #343a40; /* Dark gray month title */
+    margin-bottom: 10px;
     font-weight: 700;
 }
 
-.door:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); /* Smaller shadow */
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
 }
 
-.door-number {
-    font-size: 1.5em; /* **Made Smaller** */
-    margin-bottom: 3px;
-    line-height: 1;
+.day-cell {
+    padding: 8px 0;
+    text-align: center;
+    font-size: 0.9em;
+    border-radius: 4px;
+    transition: background-color 0.2s;
 }
 
-.door.opened {
-    background-color: #008000;
-    color: white;
+.day-cell.empty {
+    background-color: transparent;
     cursor: default;
-    border-color: white;
-    box-shadow: none;
 }
 
-.door.future {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-#message {
-    margin-top: 20px;
-    font-size: 1.2em; /* Smaller message text */
-    color: #ffd700;
+/* Current Day Styling */
+.day-cell.current-day {
+    background-color: #007bff; /* Blue dot/background */
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.4);
 }
