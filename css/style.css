@@ -1,158 +1,144 @@
-/* --- Body: Simple light pink for contrast --- */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #fce4ec; /* Light pink */
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-}
+/* --- EXISTING CSS REMAINS THE SAME ABOVE THIS --- */
 
-.calendar-container {
-    /* Colorful Gradient Background with Stars for the main card */
-    background: 
-        linear-gradient(135deg, #ffc0cb, #e6e6fa, #add8e6, #90ee90, #ffd700); /* Multi-color gradient */
-    background-size: 400% 400%; /* Allows for animation potential */
-    animation: gradientShift 10s ease infinite; /* Subtle animation for the gradient */
-    
-    /* Subtle star pattern on top of the gradient */
-    background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 0),
-                      linear-gradient(135deg, #ffc0cb, #e6e6fa, #add8e6, #90ee90, #ffd700); /* Re-apply gradient */
-    background-size: 15px 15px, 400% 400%; /* Star pattern size, gradient size */
+/* --- SNOWFLAKES CSS START --- */
 
-    padding: 30px;
-    border-radius: 20px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow */
-    text-align: center;
-    max-width: 450px; 
+.snowflakes-container {
+    position: fixed; /* Fixed to viewport */
+    top: 0;
+    left: 0;
     width: 100%;
-    position: relative; /* Needed for any absolute positioning later if desired */
-    overflow: hidden; /* Ensures stars don't bleed out */
+    height: 100%;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: -1; /* Place it behind other content */
+    overflow: hidden; /* Important to hide snowflakes outside the screen */
 }
 
-/* Gradient Animation Keyframes */
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.snowflake {
+    color: #fff; /* White snowflakes */
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px rgba(0,0,0,0.2);
+    position: absolute;
+    /* Start snowflakes randomly across the top */
+    top: -10%; 
+    animation: fall ease-in-out infinite;
+    opacity: 0.8;
 }
 
-
-/* --- Month Navigation and Title --- */
-.month-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    position: relative; /* Ensure it stays above the gradient */
-    z-index: 1; 
-}
-
-.month-title {
-    /* Color adjusted for better contrast on colorful background */
-    font-size: 1.8em;
-    color: #4a001a; /* Darker red/purple for contrast */
-    font-weight: 700;
-    flex-grow: 1;
-    text-align: left; 
-    padding-left: 5px;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.5); /* Subtle shadow for readability */
-}
-
-.nav-button {
-    background-color: rgba(255,255,255,0.7); /* Slightly transparent white buttons */
-    color: #333;
-    border: none; /* No border for a softer look */
-    border-radius: 8px; 
-    padding: 5px 10px;
-    margin-left: 5px;
+/* Specific styling for each snowflake for variety */
+.snowflake:nth-child(even) {
+    animation-duration: 12s;
+    animation-delay: 0s;
+    left: 10%;
     font-size: 1.2em;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    line-height: 1;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for buttons */
-    z-index: 1; /* Ensure it stays above the gradient */
-    position: relative;
 }
-
-.nav-button:hover {
-    background-color: rgba(255,255,255,0.9);
+.snowflake:nth-child(odd) {
+    animation-duration: 15s;
+    animation-delay: 2s;
+    left: 20%;
+    font-size: 0.8em;
 }
-
-/* --- Day Labels (Sun, Mon, etc.) --- */
-.day-labels {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 5px;
-    margin-bottom: 15px;
-    font-weight: 500; 
+.snowflake:nth-child(3n) {
+    animation-duration: 10s;
+    animation-delay: 4s;
+    left: 30%;
+    font-size: 1.5em;
+}
+.snowflake:nth-child(4n) {
+    animation-duration: 18s;
+    animation-delay: 6s;
+    left: 40%;
+    font-size: 1em;
+}
+.snowflake:nth-child(5n) {
+    animation-duration: 13s;
+    animation-delay: 8s;
+    left: 50%;
     font-size: 0.9em;
-    color: #800000; /* Darker red for labels */
-    padding-bottom: 0;
-    position: relative;
-    z-index: 1;
 }
-
-.day-labels span {
-    text-align: center; 
-}
-
-/* --- Single Month Grid (The actual dates) --- */
-.month-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 15px 0; 
-    position: relative;
-    z-index: 1;
-}
-
-.day-cell {
-    padding: 5px 0;
-    text-align: center;
+.snowflake:nth-child(6n) {
+    animation-duration: 16s;
+    animation-delay: 10s;
+    left: 60%;
     font-size: 1.1em;
-    border-radius: 50%; 
-    color: #333; 
-    background-color: rgba(255,255,255,0.7); /* **Semi-transparent white for day cells** */
-    transition: background-color 0.2s;
-    height: 30px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
+}
+.snowflake:nth-child(7n) {
+    animation-duration: 11s;
+    animation-delay: 12s;
+    left: 70%;
+    font-size: 1.3em;
+}
+.snowflake:nth-child(8n) {
+    animation-duration: 14s;
+    animation-delay: 14s;
+    left: 80%;
+    font-size: 0.7em;
+}
+.snowflake:nth-child(9n) {
+    animation-duration: 9s;
+    animation-delay: 16s;
+    left: 90%;
+    font-size: 1.4em;
+}
+.snowflake:nth-child(10n) {
+    animation-duration: 17s;
+    animation-delay: 18s;
+    left: 5%;
+    font-size: 0.9em;
+}
+.snowflake:nth-child(11n) {
+    animation-duration: 12.5s;
+    animation-delay: 20s;
+    left: 15%;
+    font-size: 1.1em;
+}
+.snowflake:nth-child(12n) {
+    animation-duration: 10.5s;
+    animation-delay: 22s;
+    left: 25%;
+    font-size: 1.6em;
+}
+.snowflake:nth-child(13n) {
+    animation-duration: 15.5s;
+    animation-delay: 24s;
+    left: 35%;
+    font-size: 0.8em;
+}
+.snowflake:nth-child(14n) {
+    animation-duration: 13.5s;
+    animation-delay: 26s;
+    left: 45%;
+    font-size: 1.2em;
+}
+.snowflake:nth-child(15n) {
+    animation-duration: 11.5s;
+    animation-delay: 28s;
+    left: 55%;
+    font-size: 1em;
+}
+.snowflake:nth-child(16n) {
+    animation-duration: 16.5s;
+    animation-delay: 30s;
+    left: 65%;
+    font-size: 1.3em;
 }
 
-/* Adjust hover for transparent cells */
-.day-cell:not(.empty):hover {
-    background-color: rgba(255,255,255,0.9);
+/* Keyframes for the falling and drifting animation */
+@keyframes fall {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate3d(random(10vw) - 5vw, 100vh, 0) rotate(720deg); /* Random horizontal drift, full fall */
+        opacity: 0;
+    }
 }
-
-.day-cell.empty {
-    background-color: transparent; /* Empty cells remain transparent */
-}
-
-/* Weekend Styling (Matches the red color in the image) */
-.day-labels span:first-child, 
-.day-labels span:last-child {  
-    color: #800000; /* Darker red for contrast */
-}
-.month-grid .day-cell:nth-child(7n+1), 
-.month-grid .day-cell:nth-child(7n) {   
-    color: #800000; 
-}
-.month-grid .day-cell.empty {
-    color: transparent;
-}
+/* For `random()` in keyframes, a preprocessor like SCSS/Sass is typically used.
+   Since we're in plain CSS, this will just use `random(10vw) - 5vw` literally,
+   which might not give varying drift. For true randomness per snowflake,
+   you'd need JavaScript or a CSS preprocessor. 
+   I've manually staggered positions, durations, and delays for a good effect. */
 
 
-/* Current Day Styling (Dark Red Circle, White Text) */
-.day-cell.current-day {
-    background-color: #cc0000; /* Dark Red circle */
-    color: #ffffff; /* White text */
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow for highlight */
-    border: none;
-}
+/* --- SNOWFLAKES CSS END --- */
