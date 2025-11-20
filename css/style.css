@@ -1,0 +1,96 @@
+body {
+    font-family: 'Mountains of Christmas', cursive;
+    background: linear-gradient(to bottom right, #e60000, #ff8080); /* Red gradient background remains full screen */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px; /* Reduced padding */
+}
+
+.calendar-container {
+    background-color: rgba(0, 51, 0, 0.9); /* Dark green, slightly transparent */
+    padding: 20px; /* Reduced padding */
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 700px; /* **MADE SMALLER: Reduced from 900px** */
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.5em; /* Slightly smaller header */
+    color: #ffd700; /* Gold */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.day-labels {
+    display: grid;
+    /* Adjusted column sizing for the smaller width, ensuring 7 columns */
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 8px; /* Reduced gap */
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 1.2em; /* Smaller label text */
+    color: #ffd700; 
+}
+
+.day-labels span {
+    text-align: center; 
+}
+
+.calendar-grid {
+    display: grid;
+    /* Use the fixed 7-column layout, reducing the min size */
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 8px; /* Reduced gap to match labels */
+}
+
+.door {
+    background-color: #ff0000;
+    border: 2px solid #ffd700; /* Thinner border */
+    border-radius: 8px; /* Slightly smaller corners */
+    height: 80px; /* **Made Smaller** */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    font-size: 1em; /* Smaller font */
+    font-weight: 700;
+}
+
+.door:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); /* Smaller shadow */
+}
+
+.door-number {
+    font-size: 1.5em; /* **Made Smaller** */
+    margin-bottom: 3px;
+    line-height: 1;
+}
+
+.door.opened {
+    background-color: #008000;
+    color: white;
+    cursor: default;
+    border-color: white;
+    box-shadow: none;
+}
+
+.door.future {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 1.2em; /* Smaller message text */
+    color: #ffd700;
+}
