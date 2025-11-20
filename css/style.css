@@ -1,96 +1,169 @@
+/* --- Body: Red Background for Christmas Theme --- */
 body {
     font-family: 'Mountains of Christmas', cursive;
-    background: linear-gradient(to bottom right, #e60000, #ff8080); /* Red gradient background remains full screen */
+    background: linear-gradient(to top, #990000, #ff4d4d); /* Soft Red Gradient */
     color: white;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     min-height: 100vh;
     margin: 0;
-    padding: 10px; /* Reduced padding */
+    padding: 20px;
 }
 
 .calendar-container {
-    background-color: rgba(0, 51, 0, 0.9); /* Dark green, slightly transparent */
-    padding: 20px; /* Reduced padding */
+    /* Main container: Deep Green with gold border and shadow */
+    background-color: rgba(0, 51, 0, 0.95); /* Deep Christmas Green */
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border: 3px solid #ffd700; /* Gold border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     text-align: center;
-    max-width: 700px; /* **MADE SMALLER: Reduced from 900px** */
+    max-width: 500px; 
     width: 100%;
 }
 
-h1 {
-    font-size: 2.5em; /* Slightly smaller header */
-    color: #ffd700; /* Gold */
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+/* --- Month Navigation and Title --- */
+.month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
+.month-title {
+    /* Title in bright yellow/gold */
+    font-size: 2.5em;
+    color: #ffd700; 
+    font-weight: 700;
+    flex-grow: 1;
+    text-align: center;
+    text-shadow: 2px 2px 5px #000;
+}
+
+.nav-button {
+    /* Gold buttons with red text */
+    background-color: #ffd700; 
+    color: #990000; 
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 1.5em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    line-height: 1; 
+}
+
+.nav-button:hover {
+    background-color: #ffeb80; 
+    transform: scale(1.05);
+}
+
+/* --- Day Labels (Sun, Mon, etc.) --- */
 .day-labels {
     display: grid;
-    /* Adjusted column sizing for the smaller width, ensuring 7 columns */
     grid-template-columns: repeat(7, 1fr); 
-    gap: 8px; /* Reduced gap */
-    margin-bottom: 5px;
+    gap: 5px;
+    margin-bottom: 15px;
     font-weight: 700;
-    font-size: 1.2em; /* Smaller label text */
-    color: #ffd700; 
+    font-size: 1.1em;
+    color: #fff; /* White labels */
+    border-bottom: 2px dashed #990000; 
+    padding-bottom: 8px;
 }
 
 .day-labels span {
     text-align: center; 
 }
 
-.calendar-grid {
+/* --- Single Month Grid (The actual dates) --- */
+.month-grid {
     display: grid;
-    /* Use the fixed 7-column layout, reducing the min size */
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 8px; /* Reduced gap to match labels */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px; /* Slightly tighter grid */
+    margin-top: 10px;
 }
 
-.door {
-    background-color: #ff0000;
-    border: 2px solid #ffd700; /* Thinner border */
-    border-radius: 8px; /* Slightly smaller corners */
-    height: 80px; /* **Made Smaller** */
+.day-cell {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.2em;
+    border-radius: 8px; /* Rounded rectangles */
+    color: #ffd700; /* Gold text for dates */
+    background-color: #990000; /* Red box background */
+    border: 1px solid #ffeb80; /* Light gold outline */
+    transition: background-color 0.2s, transform 0.1s;
+    height: 40px; 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none;
-    font-size: 1em; /* Smaller font */
+    justify-content: center;
     font-weight: 700;
+    text-shadow: 1px 1px 1px #000;
 }
 
-.door:hover {
+.day-cell:not(.empty):hover {
+    background-color: #cc0000; /* Darker red on hover */
     transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); /* Smaller shadow */
 }
 
-.door-number {
-    font-size: 1.5em; /* **Made Smaller** */
-    margin-bottom: 3px;
-    line-height: 1;
+.day-cell.empty {
+    background-color: transparent;
+    border: none;
 }
 
-.door.opened {
-    background-color: #008000;
-    color: white;
-    cursor: default;
-    border-color: white;
-    box-shadow: none;
+/* Current Day Styling */
+.day-cell.current-day {
+    background-color: #008000; /* Bright Green for current day */
+    color: #ffffff; 
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* White glow */
+    border: 2px solid #fff;
 }
 
-.door.future {
-    opacity: 0.5;
-    cursor: not-allowed;
+/* --- SNOWFLAKES CSS START --- */
+.snowflakes-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1; 
+    overflow: hidden; 
 }
 
-#message {
-    margin-top: 20px;
-    font-size: 1.2em; /* Smaller message text */
-    color: #ffd700;
+.snowflake {
+    color: #fff; 
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Stronger glow for visibility */
+    position: absolute;
+    top: -10%; 
+    animation: fall ease-in-out infinite;
+    opacity: 0.8;
 }
+
+/* Specific styling for each snowflake for variety (same timing as previous step) */
+.snowflake:nth-child(even) { animation-duration: 12s; animation-delay: 0s; left: 10%; font-size: 1.2em;}
+.snowflake:nth-child(odd) { animation-duration: 15s; animation-delay: 2s; left: 20%; font-size: 0.8em;}
+.snowflake:nth-child(3n) { animation-duration: 10s; animation-delay: 4s; left: 30%; font-size: 1.5em;}
+.snowflake:nth-child(4n) { animation-duration: 18s; animation-delay: 6s; left: 40%; font-size: 1em;}
+.snowflake:nth-child(5n) { animation-duration: 13s; animation-delay: 8s; left: 50%; font-size: 0.9em;}
+.snowflake:nth-child(6n) { animation-duration: 16s; animation-delay: 10s; left: 60%; font-size: 1.1em;}
+.snowflake:nth-child(7n) { animation-duration: 11s; animation-delay: 12s; left: 70%; font-size: 1.3em;}
+.snowflake:nth-child(8n) { animation-duration: 14s; animation-delay: 14s; left: 80%; font-size: 0.7em;}
+.snowflake:nth-child(9n) { animation-duration: 9s; animation-delay: 16s; left: 90%; font-size: 1.4em;}
+.snowflake:nth-child(10n) { animation-duration: 17s; animation-delay: 18s; left: 5%; font-size: 0.9em;}
+.snowflake:nth-child(11n) { animation-duration: 12.5s; animation-delay: 20s; left: 15%; font-size: 1.1em;}
+.snowflake:nth-child(12n) { animation-duration: 10.5s; animation-delay: 22s; left: 25%; font-size: 1.6em;}
+.snowflake:nth-child(13n) { animation-duration: 15.5s; animation-delay: 24s; left: 35%; font-size: 0.8em;}
+.snowflake:nth-child(14n) { animation-duration: 13.5s; animation-delay: 26s; left: 45%; font-size: 1.2em;}
+.snowflake:nth-child(15n) { animation-duration: 11.5s; animation-delay: 28s; left: 55%; font-size: 1em;}
+.snowflake:nth-child(16n) { animation-duration: 16.5s; animation-delay: 30s; left: 65%; font-size: 1.3em;}
+
+@keyframes fall {
+    0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.8; }
+    100% { transform: translate3d(random(10vw) - 5vw, 100vh, 0) rotate(720deg); opacity: 0; }
+}
+/* --- SNOWFLAKES CSS END --- */
