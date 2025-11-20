@@ -1,66 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const yearView = document.getElementById('yearView');
-    const today = new Date();
-    const currentDay = today.getDate();
-    const currentMonth = today.getMonth(); // 0-11
-    const currentYear = today.getFullYear();
+    const monthGrid = document.getElementById('monthGrid');
+    const monthTitleDisplay = document.getElementById('monthTitle');
+    const prevButton = document.getElementById('prevMonth');
+    const nextButton = document.getElementById('nextMonth');
 
-    // Months of the year
+    // State: Start view on the current date, but force 2025
+    let currentDate = new Date(2025, new Date().getMonth(), 1); 
+    // Ensure we start at 2025, but use the current month for initial context
+
     const monthNames = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
 
-    // Main function to generate the entire 2025 calendar
-    function generateCalendar(year) {
-        // Loop through all 12 months
-        for (let month = 0; month < 12; month++) {
-            const monthCard = document.createElement('div');
-            monthCard.classList.add('month-card');
-            
-            // Month Title
-            const title = document.createElement('div');
-            title.classList.add('month-title');
-            title.textContent = `${monthNames[month]} ${year}`;
-            monthCard.appendChild(title);
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
 
-            // Calendar Grid for the month
-            const monthGrid = document.createElement('div');
-            monthGrid.classList.add('month-grid');
 
-            // 1. Determine the first day of the month (0=Sun, 6=Sat)
-            const firstDayOfMonth = new Date(year, month, 1).getDay();
+    // --- Core function to draw the calendar for the currently set month ---
+    function renderCalendar() {
+        // Clear previous days
+        monthGrid.innerHTML = ''; 
 
-            // 2. Get the number of days in the month
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const month = currentDate.getMonth();
+        const year = currentDate.getFullYear();
+        
+        // Update the title display
+        monthTitleDisplay.textContent = `${monthNames[month]} ${year}`;
 
-            // 3. Add empty cells for the previous month's days
-            // The grid starts on Sunday, so if Jan 1 is Wednesday (3), we need 3 empty cells.
-            for (let i = 0; i < firstDayOfMonth; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.classList.add('day-cell', 'empty');
-                monthGrid.appendChild(emptyCell);
-            }
+        // 1. Determine the first day of the month (0=Sun, 6=Sat)
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
 
-            // 4. Add cells for the actual days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayCell = document.createElement('div');
-                dayCell.classList.add('day-cell');
-                dayCell.textContent = day;
+        // 2. Get the number of days in the month
+        // (Date 0 of the next month is the last day of the current month)
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-                // Highlight the current day (only if it's the correct year and month)
-                if (day === currentDay && month === currentMonth && year === currentYear) {
-                    dayCell.classList.add('current-day');
-                }
-                
-                monthGrid.appendChild(dayCell);
+        // 3. Add empty cells (padding)
+        for (let i = 0; i < firstDayOfMonth; i++) {
+            const emptyCell = document.createElement('div');
+            emptyCell.classList.add('day-cell', 'empty');
+            monthGrid.appendChild(emptyCell);
+        }
+
+        // 4. Add cells for the actual days
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayCell = document.createElement('div');
+            dayCell.classList.add('day-cell');
+            dayCell.textContent = day;
+
+            // Highlight the *real* current day if it matches the displayed month/year
+            if (day === currentDay && month === currentMonth && year === currentYear) {
+                dayCell.classList.add('current-day');
             }
             
-            monthCard.appendChild(monthGrid);
-            yearView.appendChild(monthCard);
+            monthGrid.appendChild(dayCell);
         }
     }
 
-    // Run the generator for the year 2025
-    generateCalendar(2025);
+    // --- Navigation Handlers ---
+    prevButton.addEventListener('click', () => {
+        // Decrease month by one. Setting day to 1 avoids issues with months of different lengths (e.g., 31st)
+        currentDate.setMonth(currentDate.getMonth() - 1, 1); 
+        renderCalendar();
+    });
+
+    nextButton.addEventListener('click', () => {
+        // Increase month by one
+        currentDate.setMonth(currentDate.getMonth() + 1, 1);
+        renderCalendar();
+    });
+
+    // Initial render
+    renderCalendar();
 });
